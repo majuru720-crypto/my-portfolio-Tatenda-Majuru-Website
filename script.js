@@ -1,6 +1,30 @@
 const products = [
   {
     id: 1,
+    name: 'Ivory Atelier Blazer',
+    category: 'Outerwear',
+    price: 140,
+    description: 'Structured premium blazer with soft satin accents and gallery-inspired lines.',
+    badge: 'Best Seller',
+    mood: 'Editorial tailoring'
+  },
+  {
+    id: 2,
+    name: 'Golden Hour Silk Dress',
+    category: 'Dresses',
+    price: 180,
+    description: 'Elegant fluid dress with a subtle glow and premium event-ready movement.',
+    badge: 'New',
+    mood: 'Evening statement'
+  },
+  {
+    id: 3,
+    name: 'Signature Tailored Trousers',
+    category: 'Bottoms',
+    price: 95,
+    description: 'High-waist tailored trousers cut for modern proportion and everyday polish.',
+    badge: 'Essential',
+    mood: 'Quiet luxury'
     name: 'Ivory Blazer',
     category: 'Outerwear',
     price: 140,
@@ -28,6 +52,18 @@ const products = [
     name: 'Gallery Knit Top',
     category: 'Tops',
     price: 72,
+    description: 'Soft knit texture designed for refined layering and effortless styling.',
+    badge: 'Limited',
+    mood: 'Soft structure'
+  },
+  {
+    id: 5,
+    name: 'Studio Longline Coat',
+    category: 'Outerwear',
+    price: 220,
+    description: 'An elegant long coat designed to finish looks with warmth and authority.',
+    badge: 'Premium',
+    mood: 'Winter capsule'
     description: 'Soft knit texture designed for elevated layering.',
     badge: 'Limited'
   },
@@ -44,6 +80,9 @@ const products = [
     name: 'Gold Trim Skirt',
     category: 'Bottoms',
     price: 88,
+    description: 'Refined silhouette with subtle metallic detail and elevated movement.',
+    badge: 'Editor Pick',
+    mood: 'Day-to-night'
     description: 'Refined silhouette with subtle metallic detailing.',
     badge: 'Editor Pick'
   }
@@ -67,6 +106,20 @@ function renderProducts() {
     .map(
       (product) => `
         <article class="product-card">
+          <div class="product-visual">
+            <div>
+              <span class="product-tag">${product.badge}</span>
+              <strong>${product.name}</strong>
+            </div>
+          </div>
+          <div class="product-copy">
+            <span class="product-mood">${product.mood}</span>
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="product-meta">
+              <span>${product.category}</span>
+              <strong>$${product.price}</strong>
+            </div>
           <div class="product-visual">${product.name.split(' ')[0]}</div>
           <div class="product-tag">${product.badge}</div>
           <h3>${product.name}</h3>
@@ -92,6 +145,7 @@ function renderCart() {
           <div class="cart-item">
             <div>
               <h3>${item.name}</h3>
+              <p>${item.category} · ${item.mood} · $${item.price}</p>
               <p>${item.category} · $${item.price}</p>
             </div>
             <button class="remove-item" data-index="${index}">Remove</button>
@@ -109,6 +163,12 @@ function renderCart() {
 
 function addToCart(productId) {
   const selectedProduct = products.find((product) => product.id === Number(productId));
+  if (!selectedProduct) {
+    return;
+  }
+
+  cart.push(selectedProduct);
+  formMessage.textContent = `${selectedProduct.name} added to your cart.`;
   if (!selectedProduct) return;
   cart.push(selectedProduct);
   renderCart();
@@ -123,6 +183,7 @@ productGrid.addEventListener('click', (event) => {
 cartItems.addEventListener('click', (event) => {
   if (event.target.classList.contains('remove-item')) {
     cart.splice(Number(event.target.dataset.index), 1);
+    formMessage.textContent = 'Your cart has been updated.';
     renderCart();
   }
 });
