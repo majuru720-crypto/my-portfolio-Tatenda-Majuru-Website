@@ -1,15 +1,9 @@
-const currencyFormatter = new Intl.NumberFormat('en-ZA', {
-  style: 'currency',
-  currency: 'ZAR',
-  maximumFractionDigits: 0
-});
-
 const products = [
   {
     id: 1,
     name: 'Ivory Atelier Blazer',
     category: 'Outerwear',
-    price: 2650,
+    price: 140,
     description: 'Structured premium blazer with soft satin accents and gallery-inspired lines.',
     badge: 'Best Seller',
     mood: 'Editorial tailoring'
@@ -18,7 +12,7 @@ const products = [
     id: 2,
     name: 'Golden Hour Silk Dress',
     category: 'Dresses',
-    price: 3250,
+    price: 180,
     description: 'Elegant fluid dress with a subtle glow and premium event-ready movement.',
     badge: 'New',
     mood: 'Evening statement'
@@ -27,16 +21,37 @@ const products = [
     id: 3,
     name: 'Signature Tailored Trousers',
     category: 'Bottoms',
-    price: 1850,
+    price: 95,
     description: 'High-waist tailored trousers cut for modern proportion and everyday polish.',
     badge: 'Essential',
     mood: 'Quiet luxury'
+    name: 'Ivory Blazer',
+    category: 'Outerwear',
+    price: 140,
+    description: 'Structured premium blazer with soft satin accents.',
+    badge: 'Best Seller'
+  },
+  {
+    id: 2,
+    name: 'Aurum Dress',
+    category: 'Dresses',
+    price: 180,
+    description: 'Elegant silk-inspired dress with gold-tone finish.',
+    badge: 'New'
+  },
+  {
+    id: 3,
+    name: 'Signature Trousers',
+    category: 'Bottoms',
+    price: 95,
+    description: 'Tailored comfort with a timeless straight-leg cut.',
+    badge: 'Essential'
   },
   {
     id: 4,
     name: 'Gallery Knit Top',
     category: 'Tops',
-    price: 1450,
+    price: 72,
     description: 'Soft knit texture designed for refined layering and effortless styling.',
     badge: 'Limited',
     mood: 'Soft structure'
@@ -45,19 +60,31 @@ const products = [
     id: 5,
     name: 'Studio Longline Coat',
     category: 'Outerwear',
-    price: 3890,
+    price: 220,
     description: 'An elegant long coat designed to finish looks with warmth and authority.',
     badge: 'Premium',
     mood: 'Winter capsule'
+    description: 'Soft knit texture designed for elevated layering.',
+    badge: 'Limited'
+  },
+  {
+    id: 5,
+    name: 'Studio Coat',
+    category: 'Outerwear',
+    price: 220,
+    description: 'Clean longline coat made for cool-weather luxury.',
+    badge: 'Premium'
   },
   {
     id: 6,
     name: 'Gold Trim Skirt',
     category: 'Bottoms',
-    price: 1690,
+    price: 88,
     description: 'Refined silhouette with subtle metallic detail and elevated movement.',
     badge: 'Editor Pick',
     mood: 'Day-to-night'
+    description: 'Refined silhouette with subtle metallic detailing.',
+    badge: 'Editor Pick'
   }
 ];
 
@@ -74,15 +101,11 @@ const cartButton = document.querySelector('.cart-button');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-function formatPrice(amount) {
-  return currencyFormatter.format(amount);
-}
-
 function renderProducts() {
   productGrid.innerHTML = products
     .map(
-      (product, index) => `
-        <article class="product-card fade-up delay-${index % 3}">
+      (product) => `
+        <article class="product-card">
           <div class="product-visual">
             <div>
               <span class="product-tag">${product.badge}</span>
@@ -95,8 +118,15 @@ function renderProducts() {
             <p>${product.description}</p>
             <div class="product-meta">
               <span>${product.category}</span>
-              <strong>${formatPrice(product.price)}</strong>
+              <strong>$${product.price}</strong>
             </div>
+          <div class="product-visual">${product.name.split(' ')[0]}</div>
+          <div class="product-tag">${product.badge}</div>
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <div class="product-meta">
+            <span>${product.category}</span>
+            <strong>$${product.price}</strong>
           </div>
           <button class="button primary add-to-cart" data-id="${product.id}">Add to Cart</button>
         </article>
@@ -112,10 +142,11 @@ function renderCart() {
     cartItems.innerHTML = cart
       .map(
         (item, index) => `
-          <div class="cart-item fade-up">
+          <div class="cart-item">
             <div>
               <h3>${item.name}</h3>
-              <p>${item.category} · ${item.mood} · ${formatPrice(item.price)}</p>
+              <p>${item.category} · ${item.mood} · $${item.price}</p>
+              <p>${item.category} · $${item.price}</p>
             </div>
             <button class="remove-item" data-index="${index}">Remove</button>
           </div>
@@ -127,7 +158,7 @@ function renderCart() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   cartCount.textContent = cart.length;
   summaryCount.textContent = cart.length;
-  summaryTotal.textContent = formatPrice(total);
+  summaryTotal.textContent = `$${total}`;
 }
 
 function addToCart(productId) {
@@ -138,6 +169,8 @@ function addToCart(productId) {
 
   cart.push(selectedProduct);
   formMessage.textContent = `${selectedProduct.name} added to your cart.`;
+  if (!selectedProduct) return;
+  cart.push(selectedProduct);
   renderCart();
 }
 
