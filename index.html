@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bazquiat | Premium Clothing House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero" id="home">
+      <nav class="navbar">
+        <a href="#home" class="logo">Bazquiat</a>
+        <button class="menu-toggle" aria-label="Open navigation menu">☰</button>
+        <div class="nav-links">
+          <a href="#pieces">Pieces of the Day</a>
+          <a href="#about">About</a>
+          <a href="#shop">Shop</a>
+          <a href="#order">Order</a>
+          <button class="cart-button" type="button">Cart <span id="cart-count">0</span></button>
+        </div>
+      </nav>
+
+      <section class="hero-content">
+        <div>
+          <p class="eyebrow">Modern luxury, crafted with intention</p>
+          <h1>The Bazquiat wardrobe for bold everyday elegance.</h1>
+          <p class="hero-text">
+            Discover premium essentials in a refined white-and-gold experience built for
+            modern shoppers on any screen size.
+          </p>
+          <div class="hero-actions">
+            <a href="#shop" class="button primary">Shop the Collection</a>
+            <a href="#about" class="button secondary">Our Story</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <p class="card-label">Signature Drop</p>
+          <h2>Aurum Set</h2>
+          <p>Structured tailoring, soft textures, and limited-edition gold detailing.</p>
+          <div class="hero-price-row">
+            <span>$260</span>
+            <span>Limited stock</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section" id="pieces">
+        <div class="section-heading">
+          <p class="eyebrow">Pieces of the Day</p>
+          <h2>Today’s standout looks</h2>
+          <p>
+            A handpicked edit designed to introduce shoppers to the best of Bazquiat.
+          </p>
+        </div>
+        <div class="featured-grid">
+          <article class="featured-item">
+            <span>01</span>
+            <h3>Ivory Statement Blazer</h3>
+            <p>Sharp structure with satin lining for polished day-to-night styling.</p>
+          </article>
+          <article class="featured-item accent">
+            <span>02</span>
+            <h3>Golden Hour Silk Dress</h3>
+            <p>Fluid movement and warm metallic detail for elevated occasions.</p>
+          </article>
+          <article class="featured-item">
+            <span>03</span>
+            <h3>Signature Tailored Trousers</h3>
+            <p>High-waist comfort with a modern straight fit and luxury finish.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div class="section-heading narrow">
+          <p class="eyebrow">About Bazquiat</p>
+          <h2>The history of the brand</h2>
+        </div>
+        <div class="about-layout">
+          <article>
+            <h3>Born from art and tailoring</h3>
+            <p>
+              Bazquiat began as a small studio focused on blending gallery-inspired design
+              with wearable silhouettes. The brand grew from custom wardrobe pieces into a
+              full clothing house known for clean lines, premium fabrics, and confident
+              styling.
+            </p>
+          </article>
+          <article>
+            <h3>Built for modern expression</h3>
+            <p>
+              Each collection celebrates individuality with a premium white-and-gold
+              aesthetic. Today, Bazquiat creates capsule pieces that feel timeless, easy to
+              combine, and elegant for everyday wear.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="shop">
+        <div class="section-heading">
+          <p class="eyebrow">Purchasing Section</p>
+          <h2>Shop every piece</h2>
+          <p>Browse the collection and add items to your cart with one click.</p>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <section class="section cart-section" id="cart">
+        <div class="section-heading">
+          <p class="eyebrow">Cart</p>
+          <h2>Your selected pieces</h2>
+          <p>Review your order before completing the form below.</p>
+        </div>
+        <div class="cart-layout">
+          <div id="cart-items" class="cart-items"></div>
+          <aside class="cart-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <span>Items</span>
+              <span id="summary-count">0</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="summary-total">$0</span>
+            </div>
+            <a href="#order" class="button primary full-width">Continue to Order</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section order-section" id="order">
+        <div class="section-heading">
+          <p class="eyebrow">Ordering Form</p>
+          <h2>Place your order</h2>
+          <p>Fill in your details and we’ll prepare your Bazquiat delivery.</p>
+        </div>
+        <form class="order-form" id="order-form">
+          <label>
+            Full name
+            <input type="text" name="name" placeholder="Your full name" required />
+          </label>
+          <label>
+            Email address
+            <input type="email" name="email" placeholder="name@example.com" required />
+          </label>
+          <label>
+            Phone number
+            <input type="tel" name="phone" placeholder="(555) 123-4567" required />
+          </label>
+          <label>
+            Delivery address
+            <textarea name="address" rows="4" placeholder="Street, city, state, ZIP" required></textarea>
+          </label>
+          <label>
+            Order notes
+            <textarea name="notes" rows="4" placeholder="Sizing, colors, or delivery notes"></textarea>
+          </label>
+          <button class="button primary full-width" type="submit">Submit Order</button>
+          <p class="form-message" id="form-message"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 Bazquiat. Premium clothing for modern wardrobes.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
