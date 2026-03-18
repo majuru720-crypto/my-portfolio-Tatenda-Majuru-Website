@@ -25,6 +25,27 @@ const products = [
     description: 'High-waist tailored trousers cut for modern proportion and everyday polish.',
     badge: 'Essential',
     mood: 'Quiet luxury'
+    name: 'Ivory Blazer',
+    category: 'Outerwear',
+    price: 140,
+    description: 'Structured premium blazer with soft satin accents.',
+    badge: 'Best Seller'
+  },
+  {
+    id: 2,
+    name: 'Aurum Dress',
+    category: 'Dresses',
+    price: 180,
+    description: 'Elegant silk-inspired dress with gold-tone finish.',
+    badge: 'New'
+  },
+  {
+    id: 3,
+    name: 'Signature Trousers',
+    category: 'Bottoms',
+    price: 95,
+    description: 'Tailored comfort with a timeless straight-leg cut.',
+    badge: 'Essential'
   },
   {
     id: 4,
@@ -43,6 +64,16 @@ const products = [
     description: 'An elegant long coat designed to finish looks with warmth and authority.',
     badge: 'Premium',
     mood: 'Winter capsule'
+    description: 'Soft knit texture designed for elevated layering.',
+    badge: 'Limited'
+  },
+  {
+    id: 5,
+    name: 'Studio Coat',
+    category: 'Outerwear',
+    price: 220,
+    description: 'Clean longline coat made for cool-weather luxury.',
+    badge: 'Premium'
   },
   {
     id: 6,
@@ -52,6 +83,8 @@ const products = [
     description: 'Refined silhouette with subtle metallic detail and elevated movement.',
     badge: 'Editor Pick',
     mood: 'Day-to-night'
+    description: 'Refined silhouette with subtle metallic detailing.',
+    badge: 'Editor Pick'
   }
 ];
 
@@ -87,6 +120,13 @@ function renderProducts() {
               <span>${product.category}</span>
               <strong>$${product.price}</strong>
             </div>
+          <div class="product-visual">${product.name.split(' ')[0]}</div>
+          <div class="product-tag">${product.badge}</div>
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <div class="product-meta">
+            <span>${product.category}</span>
+            <strong>$${product.price}</strong>
           </div>
           <button class="button primary add-to-cart" data-id="${product.id}">Add to Cart</button>
         </article>
@@ -106,6 +146,7 @@ function renderCart() {
             <div>
               <h3>${item.name}</h3>
               <p>${item.category} · ${item.mood} · $${item.price}</p>
+              <p>${item.category} · $${item.price}</p>
             </div>
             <button class="remove-item" data-index="${index}">Remove</button>
           </div>
@@ -128,6 +169,8 @@ function addToCart(productId) {
 
   cart.push(selectedProduct);
   formMessage.textContent = `${selectedProduct.name} added to your cart.`;
+  if (!selectedProduct) return;
+  cart.push(selectedProduct);
   renderCart();
 }
 
